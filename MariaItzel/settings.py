@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'zapateria.urls'
+ROOT_URLCONF = 'MariaItzel.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'zapateria.wsgi.application'
+WSGI_APPLICATION = 'MariaItzel.wsgi.application'
 
 
 # Database
@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': 'zapateria/my.cnf',
+            'read_default_file': 'MariaItzel/my.cnf',
         },
         'ATOMIC_REQUESTS': True
     }
