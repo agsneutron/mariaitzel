@@ -108,7 +108,7 @@ class OrdenCompra(models.Model):
     factura = models.CharField(max_length=50, null=False, blank=False, verbose_name="Factura")
     lugar_entrega = models.CharField(verbose_name='Lugar de Entrega', blank=True, null=True, max_length=250)
     usuario_genera = models.ForeignKey(User, verbose_name="Usuario que Genera", blank=True, null=False, related_name='%(class)s_requests_created')
-    usuario_recibe = models.ForeignKey(User, null=True, blank=False, verbose_name="Usuario que Recibe", related_name='%(class)s_requests_modifies')
+    #usuario_recibe = models.ForeignKey(User, null=True, blank=False, verbose_name="Usuario que Recibe", related_name='%(class)s_requests_modifies')
 
     class Meta:
         verbose_name = "Orden de Compra"
@@ -134,8 +134,8 @@ class DetalleOrdenCompra(models.Model):
     articulo = models.ForeignKey(Articulo, null=False, blank=False, verbose_name="Articulo")
     cantidad_pedida = models.DecimalField(verbose_name='Cantidad Pedida', decimal_places=2, blank=True, null=True,
                                        default=0, max_digits=20)
-    cantidad_entregada = models.DecimalField(verbose_name='Cantidad Entregada', decimal_places=2, blank=True, null=True,
-                                       default=0, max_digits=20)
+    #cantidad_entregada = models.DecimalField(verbose_name='Cantidad Entregada', decimal_places=2, blank=True, null=True,
+    #                                   default=0, max_digits=20)
     costo_compra = models.DecimalField(verbose_name='Costo de Compra', decimal_places=2, blank=True, null=True,
                                        default=0, max_digits=20)
     iva = models.DecimalField(verbose_name='IVA', decimal_places=2, blank=True, null=True,
@@ -148,3 +148,15 @@ class DetalleOrdenCompra(models.Model):
     class Meta:
         verbose_name = "Detalle de Orden de Compra"
         verbose_name_plural = "Detalle de Orden de Compra"
+
+
+class RecepcionOrdenCompra(models.Model):
+    ordencompra = models.ForeignKey(OrdenCompra, null=False, blank=False, verbose_name="Orden de Compra")
+    detalleordencopra = models.ForeignKey(DetalleOrdenCompra, null=False, blank=False, verbose_name="Detalle Orden de Compra")
+    cantidad_entregada = models.DecimalField(verbose_name='Cantidad Entregada', decimal_places=2, blank=True, null=True,
+                                       default=0, max_digits=20)
+    usuario_recibe = models.ForeignKey(User, null=True, blank=False, verbose_name="Usuario que Recibe", related_name='%(class)s_requests_modifies')
+
+    class Meta:
+        verbose_name = "Recepción de Orden de Compra"
+        verbose_name_plural = "Recepción de Orden de Compra"

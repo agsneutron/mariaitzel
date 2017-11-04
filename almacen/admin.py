@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from models import CategoriaArticulo,Articulo,OrdenCompra,DetalleOrdenCompra,UnidadMedida
+from models import CategoriaArticulo,Articulo,OrdenCompra,DetalleOrdenCompra,UnidadMedida,RecepcionOrdenCompra
 
 # Register your models here.
 
@@ -32,8 +32,13 @@ class OrdenCompraAdmin(admin.ModelAdmin):
     list_display = ('folio','fecha_oc','proveedor','fecha_entrega')
     inlines = (DetalleOrdenCompraInline,)
 
+class RecepcionOrdenCompraAdmin(admin.ModelAdmin):
+    model = RecepcionOrdenCompra
+    #inlines = (DetalleOrdenCompraInline,)
+    list_display = ('cantidad_entregada','usuario_recibe')
 
 admin.site.register(CategoriaArticulo)
 admin.site.register(Articulo, ArticuloAdmin)
 admin.site.register(OrdenCompra,OrdenCompraAdmin)
 admin.site.register(UnidadMedida)
+admin.site.register(RecepcionOrdenCompra,RecepcionOrdenCompraAdmin)
