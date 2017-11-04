@@ -130,3 +130,25 @@ class Proveedor(models.Model):
             super(Proveedor, self).save(*args, **kwargs)
         else:
             Logs.log("No se pudo guardar el proveedor",'Alta')
+
+
+# class UnidadMedida(models.Model):
+#     nombre = models.CharField(verbose_name='Nombre', max_length=50, null=False, blank=False, editable=True)
+#     numero_unidades = models.CommaSeparatedIntegerField(verbose_name='Número de Unidades', default=0, null=False, blank=False, editable=True)
+#     descripcion = models.CharField(verbose_name='Descripción', max_length=50, null=False, blank=False, editable=True)
+#
+#     class Meta:
+#         verbose_name_plural = 'Unidad de Medida'
+#
+#     def __str__(self):
+#         return self.nombre
+#
+#     def save(self, *args, **kwargs):
+#         can_save = True
+#
+#         if can_save:
+#             self.last_edit_date = now()
+#             Logs.log("Guardando un nueva Unidad de Medida", "Alta")
+#             super(Proveedor, self).save(*args, **kwargs)
+#         else:
+#             Logs.log("No se pudo guardar la Unidad de Medida", 'Alta')
