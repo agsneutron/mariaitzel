@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.forms.models import model_to_dict
@@ -8,6 +9,8 @@ from smart_selects.db_fields import ChainedForeignKey
 from Logs.controller import Logs
 from concurrency.fields import IntegerVersionField
 from django.utils.timezone import now
+
+
 # Create your models here.
 
 @python_2_unicode_compatible
@@ -32,6 +35,7 @@ class Pais(models.Model):
         verbose_name_plural = 'Países'
         verbose_name = "País"
 
+
 @python_2_unicode_compatible
 class Estado(models.Model):
     nombre = models.CharField(max_length=200)
@@ -49,6 +53,7 @@ class Estado(models.Model):
         ans = model_to_dict(self)
         ans['id'] = str(self.id)
         return ans
+
 
 @python_2_unicode_compatible
 class Municipio(models.Model):
@@ -68,6 +73,7 @@ class Municipio(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
 
 @python_2_unicode_compatible
 class Proveedor(models.Model):
@@ -129,7 +135,7 @@ class Proveedor(models.Model):
             Logs.log("Guardando un nuevo Proveedor", "Alta")
             super(Proveedor, self).save(*args, **kwargs)
         else:
-            Logs.log("No se pudo guardar el proveedor",'Alta')
+            Logs.log("No se pudo guardar el proveedor", 'Alta')
 
 
 # class UnidadMedida(models.Model):
@@ -152,3 +158,164 @@ class Proveedor(models.Model):
 #             super(Proveedor, self).save(*args, **kwargs)
 #         else:
 #             Logs.log("No se pudo guardar la Unidad de Medida", 'Alta')
+
+
+@python_2_unicode_compatible
+class Corte(models.Model):
+    nombre = models.CharField(verbose_name="Corte", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class Forro(models.Model):
+    nombre = models.CharField(verbose_name="Forro", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class Ojillo(models.Model):
+    nombre = models.CharField(verbose_name="Ojillo", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class Agujeta(models.Model):
+    nombre = models.CharField(verbose_name="Agujeta", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class Suela(models.Model):
+    nombre = models.CharField(verbose_name="Suela", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class Linea(models.Model):
+    linea_de = models.CharField(verbose_name="De", max_length=5, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[0-9]*$',
+                message='Este campo debe contener numeros'
+            )
+        ])
+    linea_a = models.CharField(verbose_name="A", max_length=5, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[0-9]*$',
+                message='Este campo debe contener numeros'
+            )
+        ])
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.de + "-" + self.a
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.de + "-" + self.a
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class Estilo(models.Model):
+    nombre = models.CharField(verbose_name="Estilo", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+    imagen = models.FileField(verbose_name="Foto", upload_to="media/estilos/")
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
