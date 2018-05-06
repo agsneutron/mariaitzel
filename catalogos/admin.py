@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from models import Proveedor, Pais, Estado, Municipio
+from models import Proveedor, Pais, Estado, Municipio,DireccionEntrega, Cliente
 
 # Register your models here.
 
@@ -21,6 +21,16 @@ class ProveedorAdmin(admin.ModelAdmin):
              'calle',
              'numero', 'colonia')
          return fields
+
+class DireccionEntregaInlines(admin.TabularInline):
+    model = DireccionEntrega
+    extra = 1
+    fields = ('pais','estado','municipio','calle', 'numero', 'colonia', 'cp','telefono',)
+
+@admin.register(Cliente)
+class ClienteAdmin(admin.ModelAdmin):
+    inlines = [DireccionEntregaInlines,]
+    exclude = None
 
 admin.site.register(Pais)
 admin.site.register(Estado)
