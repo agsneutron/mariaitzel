@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from models import Proveedor, Pais, Estado, Municipio,DireccionEntrega, Cliente
+from models import Proveedor, Pais, Estado, Municipio,DireccionEntrega, Cliente,Corte, Forro, Ojillo, Agujeta, Suela, Linea
 
 # Register your models here.
 
@@ -35,4 +35,11 @@ class ClienteAdmin(admin.ModelAdmin):
 admin.site.register(Pais)
 admin.site.register(Estado)
 admin.site.register(Municipio)
+admin.site.register(Corte)
+admin.site.register(Forro)
+admin.site.register(Ojillo)
+admin.site.register(Agujeta)
+admin.site.register(Suela)
+admin.site.register(Linea)
+#admin.site.register()
 admin.site.register(Proveedor, ProveedorAdmin)
