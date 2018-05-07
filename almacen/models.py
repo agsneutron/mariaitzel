@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.validators import validate_comma_separated_integer_list
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.forms.models import model_to_dict
@@ -13,7 +14,7 @@ from users.models import User
 class UnidadMedida(models.Model):
     nombre = models.CharField(verbose_name="Unidad de Medida", max_length=50, null=False, blank=False,
                               unique=True)
-    numero_unidades = models.CommaSeparatedIntegerField(verbose_name='Número de Unidades', default=0, null=False, blank=False, editable=True, max_length=20)
+    numero_unidades = models.CharField(verbose_name='Número de Unidades', default=0, null=False, blank=False, editable=True, max_length=20, validators=[validate_comma_separated_integer_list])
     abreviatura = models.CharField(verbose_name="Unidad de Medida Abreviado", max_length=50, null=False, blank=False,
                               unique=True)
 
