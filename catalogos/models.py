@@ -297,7 +297,7 @@ class DireccionEntrega(models.Model):
 class Corte(models.Model):
     nombre = models.CharField(verbose_name="Corte", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z]*$',
+                regex='^[a-zA-Z ]*$',
                 message='Este campo no debe contener numeros'
             )
         ])
@@ -319,7 +319,7 @@ class Corte(models.Model):
 class Forro(models.Model):
     nombre = models.CharField(verbose_name="Forro", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z]*$',
+                regex='^[a-zA-Z ]*$',
                 message='Este campo no debe contener numeros'
             )
         ])
@@ -341,7 +341,7 @@ class Forro(models.Model):
 class Ojillo(models.Model):
     nombre = models.CharField(verbose_name="Ojillo", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z]*$',
+                regex='^[a-zA-Z ]*$',
                 message='Este campo no debe contener numeros'
             )
         ])
@@ -363,7 +363,7 @@ class Ojillo(models.Model):
 class Agujeta(models.Model):
     nombre = models.CharField(verbose_name="Agujeta", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z]*$',
+                regex='^[a-zA-Z ]*$',
                 message='Este campo no debe contener numeros'
             )
         ])
@@ -385,7 +385,7 @@ class Agujeta(models.Model):
 class Suela(models.Model):
     nombre = models.CharField(verbose_name="Suela", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z]*$',
+                regex='^[a-zA-Z ]*$',
                 message='Este campo no debe contener numeros'
             )
         ])
@@ -435,7 +435,7 @@ class Linea(models.Model):
 class Estilo(models.Model):
     nombre = models.CharField(verbose_name="Estilo", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z]*$',
+                regex='^[a-zA-Z ]*$',
                 message='Este campo no debe contener numeros'
             )
         ])
@@ -452,3 +452,53 @@ class Estilo(models.Model):
         ans = model_to_dict(self)
         ans['id'] = str(self.id)
         return ans
+
+@python_2_unicode_compatible
+class Color(models.Model):
+    nombre = models.CharField(verbose_name="Color", max_length=200, null=False, blank=True, validators=[
+            RegexValidator(
+                regex='^[a-zA-Z ]*$',
+                message='Este campo no debe contener numeros'
+            )
+        ])
+
+    RGB = models.CharField(verbose_name="Color RGB", max_length=6, null=False, blank=True, validators=[
+        RegexValidator(
+            regex='^[a-zA-Z0-9]*$',
+            message='Este campo es alfanumérico'
+        )
+    ])
+
+    descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.nombre
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        return ans
+
+
+@python_2_unicode_compatible
+class ParesPorPunto(models.Model):
+    linea = models.ForeignKey(Linea, null=False, blank=False)
+    talla = models.IntegerField(verbose_name='Talla',null=False, blank=False, validators=[
+        RegexValidator(regex='^[0-9]*$', message='Este campo solo acepta números')])
+    total_pares = models.IntegerField(verbose_name='Total de Pares',null=False, blank=False,validators=[
+        RegexValidator(regex='^[0-9]*$', message='Este campo solo acepta números')])
+
+    def to_serializable_dict(self):
+        ans = model_to_dict(self)
+        ans['id'] = str(self.id)
+        ans['talla'] = self.talla
+        return ans
+
+    def __str__(self):
+        return self.talla
+
+    def __unicode__(self):
+        return self.talla

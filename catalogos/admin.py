@@ -27,10 +27,30 @@ class DireccionEntregaInlines(admin.TabularInline):
     extra = 1
     fields = ('pais','estado','municipio','calle', 'numero', 'colonia', 'cp','telefono',)
 
+    def get_extra(self, request, obj=None, **kwargs):
+        """Dynamically sets the number of extra forms. 0 if the related object
+        already exists or the extra configuration otherwise."""
+        if obj:
+            # Don't add any extra forms if the related object already exists.
+            return 0
+        return self.extra
+
+    def get_formset(self, request, obj=None, **kwargs):
+        ## Put in your condition here and assign extra accordingly
+        if obj is None:
+            return super(DireccionEntregaInlines, self).get_formset(request, obj, **kwargs)
+        topic_images = 'NO'
+
+        kwargs['extra'] = 0
+        if len(topic_images) <= 3:
+            kwargs['extra'] = 10 - len(topic_images)
+        return super(DireccionEntregaInlines, self).get_formset(request, obj, **kwargs)
+
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
     inlines = [DireccionEntregaInlines,]
     exclude = None
+
 
 admin.site.register(Pais)
 admin.site.register(Estado)
