@@ -11,6 +11,7 @@ from django.utils.timezone import now
 from django.core.validators import RegexValidator
 # Create your models here.
 
+
 @python_2_unicode_compatible
 class Pais(models.Model):
     nombre = models.CharField(max_length=200)
@@ -483,22 +484,3 @@ class Color(models.Model):
         return ans
 
 
-@python_2_unicode_compatible
-class ParesPorPunto(models.Model):
-    linea = models.ForeignKey(Linea, null=False, blank=False)
-    talla = models.IntegerField(verbose_name='Talla',null=False, blank=False, validators=[
-        RegexValidator(regex='^[0-9]*$', message='Este campo solo acepta números')])
-    total_pares = models.IntegerField(verbose_name='Total de Pares',null=False, blank=False,validators=[
-        RegexValidator(regex='^[0-9]*$', message='Este campo solo acepta números')])
-
-    def to_serializable_dict(self):
-        ans = model_to_dict(self)
-        ans['id'] = str(self.id)
-        ans['talla'] = self.talla
-        return ans
-
-    def __str__(self):
-        return self.talla
-
-    def __unicode__(self):
-        return self.talla
