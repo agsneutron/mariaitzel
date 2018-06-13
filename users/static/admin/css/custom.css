@@ -1,0 +1,56 @@
+body.login_page {
+    background-color: #fefefe;
+
+}
+#header {
+    width: auto;
+    height: 0px;
+    padding: 0;
+    background: #417690;
+    line-height: 0px;
+    color: #ffc;
+    overflow: hidden;
+}
+.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=text] {
+    color: #333 /*#333*/;
+    background: #fbfbfb;
+}
+.loginpage, .loginpage form label, .loginpage form, .loginpage .message {
+    color: #aaaaaa
+ /*#ffffff*/;
+}
+.loginpage #nav a, .loginpage a {
+    color: #aaaaaa
+ /*#ffffff*/;
+    font-size: 15px;
+    color: #aaaaaa;
+}
+.btn.btn-accent {
+    background: #7e54c6;
+    color: #ffffff;
+}
+.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=password] {
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+    -ms-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+    -o-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+    /* text-shadow: 1px 1px 1px rgba(200,200,200,.1); */
+
+    font-weight: 500;
+}
+.loginpage form .input, .loginpage input[type=password] {
+    font-size: 19px;
+    width: 100%;
+    padding: 9px;
+    line-height: 25px;
+    margin: 5px 0 15px 0;
+    border: 1px solid transparent !important;
+}
+.loginpage form .input, .loginpage form input[type=checkbox], .loginpage input[type=password] {
+    color: #E91E63
+    /*#E91E63*/
+
+    ;
+    background: #fbfbfb;
+}
