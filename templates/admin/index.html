@@ -1,0 +1,177 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div class='col-xs-12'>
+                   {% comment %} <div class="page-title">
+
+                        <div class="pull-left">
+                            <h1 class="title">Dashboard</h1>
+                        </div>
+
+
+                    </div>{% endcomment %}
+                </div>
+                <div class="clearfix"></div>
+
+                <!-- card para chart -->
+                <div class="col-xs-12 col-md-4 col-lg-6">
+                    <section class="box">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="chart-container">
+                                        <div class="" style="height:300px;margin: 0 auto; padding: 0;" id="chart_1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- termina card para chart -->
+                <!-- card para chart -->
+                <div class="col-xs-12 col-md-4 col-lg-6">
+                    <section class="box ">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="chart-container">
+                                        <div class="" style="height:300px" id="chart_2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- termina card para chart -->
+
+                <!-- empieza card para porcentajes -->
+                <div class="col-xs-4 col-lg-12">
+                    <section class="box nobox marginBottom0">
+                        <div class="content-body">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-thumbs-up icon-md icon-rounded icon-primary'></i>
+                                        <div class="stats">
+                                            <h4>
+                                                <strong>5,485</strong>
+                                            </h4>
+                                            <span>Ordenes mensuales</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-edit icon-md icon-rounded icon-accent'></i>
+                                        <div class="stats">
+                                            <h4>
+                                                <strong>243</strong>
+                                            </h4>
+                                            <span>Nuevos Pedidos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 col-xs-12">
+                                    <div class="r4_counter db_box">
+                                        <i class='pull-left fa fa-dollar icon-md icon-rounded icon-purple'></i>
+                                        <div class="stats">
+                                            <h4>
+                                                <strong>$1,985,458.00</strong>
+                                            </h4>
+                                            <span>Ventas del mes</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- termina card para porcentajes -->
+     <script src="{% static "admin/js/dashboard.js" %}"></script>
+
+
+
+
+
+<div id="content-main">
+
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="app-{{ app.app_label }} module">
+        <table>
+        <caption>
+            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+        </caption>
+
+        {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+            {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+            {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.admin_url %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "You don't have permission to edit anything." %}</p>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Recent actions' %}</h2>
+        <h3>{% trans 'My actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br/>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type }}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+
+{% endblock %}
