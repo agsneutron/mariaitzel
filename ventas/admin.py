@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from models import Lote, ParesPorPunto, Pedido,ParesPorPuntoPedido,DetallePedido
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
-#from forms import *
+from forms import DetallePedidoForm
 
 # Register your models here.
 
@@ -52,14 +52,14 @@ class ParesPorPuntoPedidoInlines(NestedStackedInline):
 
 class DetallePedidoInlines(NestedStackedInline):
     model = DetallePedido
-    extra = 1
-
-    fields = ('estilo','color','corte','forro','ojillo','agujeta','suela','cliente','linea',)
     inlines = [ParesPorPuntoPedidoInlines, ]
+    form = DetallePedidoForm
+    extra = 1
 
 
 @admin.register(Pedido)
 class PedidoAdmin(NestedModelAdmin):
     inlines = [DetallePedidoInlines,]
     model = Pedido
+    fields = ('folio', 'cliente', 'fecha_creacion', 'observaciones')
     exclude = None
