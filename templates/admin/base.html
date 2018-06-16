@@ -69,7 +69,7 @@
       data-admin-utc-offset="{% now "Z" %}">
 {% if not is_popup %}
     {% block usertools %}
-        {% if has_permission %}
+        {% comment %}{% if has_permission %}{% endcomment %}
             {% block welcome-msg %}
 
                 <div class='page-topbar '>
@@ -220,7 +220,7 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a class="" href="#">item</a>
+                                            <a class="" href="#">Pedidos</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -309,7 +309,7 @@
                         {% endblock %}{% endcomment %}
                 {% endblock %}
 
-        {% endif %}
+        {% comment %}{% endif %}{% endcomment %}
     {% endblock %}
 {% block nav-global %}{% endblock %}
 </div>

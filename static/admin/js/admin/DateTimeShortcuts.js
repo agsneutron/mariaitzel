@@ -86,12 +86,12 @@
             }
             message = interpolate(message, [timezoneOffset]);
 
-            var $warning = $('<span>');
+            var $warning = $('<div>');
             $warning.attr('class', warningClass);
             $warning.text(message);
 
             $(inp).parent()
-                .append($('<br>'))
+                .append($('<>'))
                 .append($warning);
         },
         // Add clock widget to a given field
@@ -101,7 +101,7 @@
             DateTimeShortcuts.dismissClockFunc[num] = function() { DateTimeShortcuts.dismissClock(num); return true; };
 
             // Shortcut links (clock icon and "Now" link)
-            var shortcuts_span = document.createElement('span');
+            var shortcuts_span = document.createElement('div');
             shortcuts_span.className = DateTimeShortcuts.shortCutsClass;
             inp.parentNode.insertBefore(shortcuts_span, inp.nextSibling);
             var now_link = document.createElement('a');

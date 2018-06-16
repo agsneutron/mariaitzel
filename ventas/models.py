@@ -29,7 +29,7 @@ class Lote(models.Model):
     cliente = models.ForeignKey(Cliente, null=False, blank=False, verbose_name="Cliente")
     linea = models.ForeignKey(Linea, null=False, blank=False, verbose_name="Linea")
 
-    observaciones = models.TextField(verbose_name="Observaciones", max_length=600, null=False, blank=True)
+    observaciones = models.CharField(verbose_name="Observaciones", max_length=600, null=False, blank=True, )
     fecha_entrega = models.DateField(verbose_name="Fecha de Entrega", null=False, blank=False,)
     fecha_genera = models.DateField(verbose_name="Fecha de creacion", null=False, blank=False, )
     programa = models.IntegerField(verbose_name="Programa", null=False, blank=False, default=0)
