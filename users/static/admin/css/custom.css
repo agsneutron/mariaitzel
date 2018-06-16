@@ -129,3 +129,12 @@ section.box {
     background: inherit;
     color: #333;
 }
+
+.dynamic-detallepedido_set-0-paresporpuntopedido_set{
+    width: 25%;
+    display: inline-block;
+}
+.dynamic-detallepedido_set-1-paresporpuntopedido_set{
+    width: 25%;
+    display: inline-block;
+}
