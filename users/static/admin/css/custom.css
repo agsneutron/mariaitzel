@@ -131,10 +131,27 @@ section.box {
 }
 
 .dynamic-detallepedido_set-0-paresporpuntopedido_set{
-    width: 25%;
+    width: 16.66666667%;
     display: inline-block;
 }
 .dynamic-detallepedido_set-1-paresporpuntopedido_set{
-    width: 25%;
+    width: 16.66666667%;
     display: inline-block;
+}
+section .content-body {
+    padding: 5px 10px 10px 10px;
+}
+.inline-group {
+    padding: 0;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    background-color: #ffffff;
+}
+.inline-related h3 {
+    margin: 0;
+    color: #fff;
+    padding: 10px 5px;
+    font-size: 11px;
+    background: #7e54c6 url(../img/nav-bg.gif) top left repeat-x;
+    border-bottom: 1px solid #ddd;
 }
