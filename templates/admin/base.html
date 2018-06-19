@@ -324,9 +324,15 @@
 
 {% block messages %}
     {% if messages %}
-        <ul class="messagelist">{% for message in messages %}
+{% for message in messages %}
+        <div{% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade in"{% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                {{ message|capfirst }}</div>
+{% endfor %}
+
+       {% comment %} <ul class="messagelist">{% for message in messages %}
             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-        {% endfor %}</ul>
+        {% endfor %}</ul>{% endcomment %}
     {% endif %}
 {% endblock messages %}
 
