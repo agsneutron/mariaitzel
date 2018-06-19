@@ -1,5 +1,5 @@
 <style>
-    .col-xs-4 br {
+    .col-xs-3 br {
         display: none !important;
     }
 </style>
@@ -20,7 +20,7 @@
                         <div class="description">{{ fieldset.description|safe }}</div>
                     {% endif %}
                     {% for line in fieldset %}
-                        <div class="col-xs-4 {% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+                        <div class="col-xs-3 {% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
                             {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
                             {% for field in line %}
                                 <div class="form-group"{% if not line.fields|length_is:'1' %}
@@ -60,6 +60,5 @@
 <script>
     document.getElementById("id_observaciones").rows = "1";
 
-    $('.col-xs-4.field-observaciones').removeClass('col-xs-4');
-        $('.field-observaciones').addClass('col-xs-12');
+
 </script>
