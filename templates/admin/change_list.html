@@ -31,8 +31,8 @@
 
 <ol class="breadcrumb bg">
 <li><a href="{% url 'admin:index' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a> </li>
-&rsaquo;<li> <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a> </li>
-&rsaquo; {{ cl.opts.verbose_name_plural|capfirst }}
+<li> <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a> </li>
+ {{ cl.opts.verbose_name_plural|capfirst }}
 </ol>
 {% endblock %}
 {% endif %}
@@ -42,15 +42,15 @@
 {% block content %}
   <div id="content-main">
     {% block object-tools %}
-        <ul class="object-tools">
+        <ul class="object-tools2">
           {% block object-tools-items %}
             {% if has_add_permission %}
-            <li>
+
               {% url cl.opts|admin_urlname:'add' as add_url %}
-              <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
-                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-              </a>
-            </li>
+              <a href="{% add_preserved_filters add_url is_popup to_field %}" class="btn btn-primary btn-icon ">
+                <i class="fa fa-plus"></i> &nbsp; <span> {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}</span>
+            </a>
+
             {% endif %}
           {% endblock %}
         </ul>
