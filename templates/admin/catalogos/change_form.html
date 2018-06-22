@@ -14,20 +14,15 @@
 
 {% if not is_popup %}
 {% block breadcrumbs %}
-{% comment %}<div class="breadcrumbs">{% endcomment %}
 
-    <ol class="breadcrumb bg">
+<ol class="breadcrumb bg">
+
 <li><a href="{% url 'admin:index' %}"><i class="fa fa-home"></i> {% trans 'Home' %}</a> </li>
 <li> <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a></li>
         {% if has_change_permission %}<li class="active"><strong><a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a></strong></li>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
  {% if add %}<li class="active"><strong>{% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}{% else %}{{ original|truncatewords:"18" }}</strong></li>{% endif %}
-</ol>
 
-{% comment %}<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
-&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
-&rsaquo; {% if add %}{% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}{% else %}{{ original|truncatewords:"18" }}{% endif %}
-</div>{% endcomment %}
+</ol>
 {% endblock %}
 {% endif %}
 
@@ -59,7 +54,7 @@
 
 {% block field_sets %}
 {% for fieldset in adminform %}
-  {% include "admin/ventas/pedido/fieldset.html" %}
+  {% include "admin/catalogos/fieldset.html" %}
 {% endfor %}
 {% endblock %}
 
@@ -67,7 +62,7 @@
 
 {% block inline_field_sets %}
 {% for inline_admin_formset in inline_admin_formsets %}
-     {% include "admin/edit_inline/stacked-nested.html" %}
+    {% include inline_admin_formset.opts.template %}
 {% endfor %}
 {% endblock %}
 
