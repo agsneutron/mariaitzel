@@ -17,7 +17,7 @@ from django.utils.translation import ugettext as _
 
 import datetime
 
-from ventas.models import ParesPorPuntoPedido, DetallePedido
+from ventas.models import ParesPorPuntoPedido, DetallePedido, Pedido
 from django.utils.safestring import mark_safe
 from Logs.controller import Logs
 import os
@@ -30,4 +30,10 @@ from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 class DetallePedidoForm(forms.ModelForm):
     class Meta:
         model = DetallePedido
-        fields = ('estilo', 'color', 'corte', 'forro', 'ojillo', 'agujeta', 'suela', 'cliente', 'linea',)
+        fields = ('estilo', 'color', 'corte', 'forro', 'ojillo', 'agujeta', 'suela', 'linea',)
+
+
+class PedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ('folio', 'cliente', 'fecha_creacion', 'observaciones')

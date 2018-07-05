@@ -71,10 +71,10 @@ class Pedido(models.Model):
         return ans
 
     def __str__(self):
-        return self.folio
+        return str(self.folio)
 
     def __unicode__(self):
-        return self.folio
+        return str(self.folio)
 
 
 @python_2_unicode_compatible
@@ -87,14 +87,10 @@ class DetallePedido(models.Model):
     ojillo = models.ForeignKey(Ojillo, null=False, blank=False, verbose_name="Ojillo")
     agujeta = models.ForeignKey(Agujeta, null=False, blank=False, verbose_name="Agujeta")
     suela = models.ForeignKey(Suela, null=False, blank=False, verbose_name="Suela")
-    cliente = models.ForeignKey(Cliente, null=False, blank=False, verbose_name="Cliente")
     linea = models.ForeignKey(Linea, null=False, blank=False, verbose_name="Linea")
 
-    descripcion = models.TextField(verbose_name="Descripcion", max_length=600, null=False, blank=True)
-    #fecha_entrega = models.DateField(verbose_name="Fecha de Entrega", null=False, blank=False,)
-    fecha_genera = models.DateField(verbose_name="Fecha de creacion", null=False, blank=False, )
-    #programa = models.IntegerField(verbose_name="Programa", null=False, blank=False, default=0)
-    usuario_genera = models.ForeignKey(User, verbose_name="Usuario que Genera", blank=True, null=False, related_name='%(class)s_requests_created')
+    descripcion = models.TextField(verbose_name="Descripcion", max_length=600, null=True, blank=True)
+    fecha_genera = models.DateField(verbose_name="Fecha de creacion", null=False, blank=False,auto_now=True )
 
     class Meta:
         verbose_name = "Detalle de Pedido"
@@ -110,15 +106,15 @@ class DetallePedido(models.Model):
         dict['ojillo'] = self.ojillo.nombre
         dict['agujeta'] = self.agujeta.nombre
         dict['suela'] = self.suela.nombre
-        dict['usuario_genera'] = self.usuario_genera.username
         dict['id'] = str(self.id)
         return dict
 
     def __str__(self):
-        return self.folio + ": " + self.folio
+        return str(self.pedido.folio) + ": " + self.pedido.cliente.nombre
 
     def __unicode__(self):
-        return self.folio + ": " + self.folio
+        return str(self.pedido.folio) + ": " + self.pedido.cliente.nombre
+
 
 @python_2_unicode_compatible
 class ParesPorPunto(models.Model):
@@ -135,10 +131,10 @@ class ParesPorPunto(models.Model):
         return ans
 
     def __str__(self):
-        return self.talla
+        return str(self.talla)
 
     def __unicode__(self):
-        return self.talla
+        return str(self.talla)
 
 @python_2_unicode_compatible
 class ParesPorPuntoPedido(models.Model):
@@ -155,7 +151,7 @@ class ParesPorPuntoPedido(models.Model):
         return ans
 
     def __str__(self):
-        return self.talla
+        return str(self.talla)
 
     def __unicode__(self):
-        return self.talla
+        return str(self.talla)

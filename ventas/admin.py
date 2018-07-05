@@ -48,6 +48,18 @@ class ParesPorPuntoPedidoInlines(NestedStackedInline):
     extra = 1
     fields = ('talla','total_pares',)
 
+    '''def get_formset(self, request, obj=None, **kwargs):
+        ## Put in your condition here and assign extra accordingly
+        if obj is None:
+            return super(ParesPorPuntoPedidoInlines, self).get_formset(request, obj, **kwargs)
+        topic_images = 'NO'
+
+        kwargs['extra'] = 0
+        if len(topic_images) <= 3:
+            kwargs['extra'] = 10 - len(topic_images)
+        return super(ParesPorPuntoPedidoInlines, self).get_formset(request, obj, **kwargs)'''
+
+
 
 
 class DetallePedidoInlines(NestedStackedInline):
@@ -63,3 +75,7 @@ class PedidoAdmin(NestedModelAdmin):
     model = Pedido
     fields = ('folio', 'cliente', 'fecha_creacion', 'observaciones')
     exclude = None
+
+
+
+

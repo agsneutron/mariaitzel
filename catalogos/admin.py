@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from models import Proveedor, Pais, Estado, Municipio,DireccionEntrega, Cliente,Corte, Forro, Ojillo, Agujeta, Suela, Linea, Estilo
+from models import Proveedor, Pais, Estado, Municipio,DireccionEntrega, Cliente,Corte, Forro, Ojillo, Agujeta, Suela, Linea, Estilo, Color
 
 # Register your models here.
 
@@ -42,8 +42,8 @@ class DireccionEntregaInlines(admin.TabularInline):
         topic_images = 'NO'
 
         kwargs['extra'] = 0
-        if len(topic_images) <= 3:
-            kwargs['extra'] = 10 - len(topic_images)
+        #if len(topic_images) <= 3:
+        #    kwargs['extra'] = 10 - len(topic_images)
         return super(DireccionEntregaInlines, self).get_formset(request, obj, **kwargs)
 
 @admin.register(Cliente)
@@ -62,5 +62,6 @@ admin.site.register(Agujeta)
 admin.site.register(Suela)
 admin.site.register(Linea)
 admin.site.register(Estilo)
+admin.site.register(Color)
 #admin.site.register()
 admin.site.register(Proveedor, ProveedorAdmin)

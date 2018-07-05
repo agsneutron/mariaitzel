@@ -384,10 +384,10 @@ class Agujeta(models.Model):
 
 @python_2_unicode_compatible
 class Suela(models.Model):
-    nombre = models.CharField(verbose_name="Suela", max_length=200, null=False, blank=True, validators=[
+    nombre = models.CharField(verbose_name="Suela", max_length=30, null=False, blank=True, validators=[
             RegexValidator(
-                regex='^[a-zA-Z ]*$',
-                message='Este campo no debe contener numeros'
+                regex='^[a-zA-Z0-9 ]*$',
+                message='Este campo no debe contener caracteres especiales'
             )
         ])
     descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
@@ -421,10 +421,10 @@ class Linea(models.Model):
     descripcion = models.TextField(verbose_name="Descripción", max_length=600, null=False, blank=True)
 
     def __str__(self):  # __unicode__ on Python 2
-        return self.de + "-" + self.a
+        return self.linea_de + "-" + self.linea_a
 
     def __unicode__(self):  # __unicode__ on Python 2
-        return self.de + "-" + self.a
+        return self.linea_de + "-" + self.linea_a
 
     def to_serializable_dict(self):
         ans = model_to_dict(self)
@@ -434,6 +434,13 @@ class Linea(models.Model):
 
 @python_2_unicode_compatible
 class Estilo(models.Model):
+    codigo = models.CharField(verbose_name="Código", max_length=3, null=False, blank=True,
+                              validators=[
+                                  RegexValidator(
+                                      regex='^[0-9]*$',
+                                      message='Este campo no debe contener letras'
+                                  )
+                              ])
     nombre = models.CharField(verbose_name="Estilo", max_length=200, null=False, blank=True, validators=[
             RegexValidator(
                 regex='^[a-zA-Z ]*$',
