@@ -17,11 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 
+
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='/admin')),
     url(r'^chaining/', include('smart_selects.urls')),
+    url(r'^_nested_admin/', include('nested_admin.urls')),
 
 ]

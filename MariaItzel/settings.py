@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'smart_selects',
     'nested_inline',
+    'nested_admin',
     'users',
     'almacen',
     'catalogos',

@@ -5,6 +5,9 @@ from django.contrib import admin
 from models import Lote, ParesPorPunto, Pedido,ParesPorPuntoPedido,DetallePedido
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from forms import DetallePedidoForm
+import urllib
+from django.conf.urls import url
+from ventas import views
 
 # Register your models here.
 
@@ -73,8 +76,20 @@ class DetallePedidoInlines(NestedStackedInline):
 class PedidoAdmin(NestedModelAdmin):
     inlines = [DetallePedidoInlines,]
     model = Pedido
+    list_display = ('id', 'folio','cliente',)
     fields = ('folio', 'cliente', 'fecha_creacion', 'observaciones')
     exclude = None
+
+
+    def get_urls(self):
+        urls = super(PedidoAdmin, self).get_urls()
+        my_urls = [
+            url(r'^$',
+                self.admin_site.admin_view(views.PedidoListView.as_view()), name='pedido-list-view'),
+            url(r'^(?P<pk>\d+)/$', views.PedidoDetailView.as_view(), name='pedido-detail'),
+        ]
+
+        return my_urls + urls
 
 
 

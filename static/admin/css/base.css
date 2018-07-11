@@ -7,7 +7,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-size: 12px;
+    font-size: 14px;
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     color: #333;
     background: #fff;
@@ -366,6 +366,7 @@ table thead th.sorted .sortoptions a.sortremove {
 }
 
 table thead th.sorted .sortoptions a.sortremove:after {
+    content: '\\';
     position: absolute;
     top: -6px;
     left: 3px;
@@ -712,19 +713,19 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 .object-tools a {
-    border-radius: 0;
+    border-radius: 15px;
 }
 
 .object-tools a:link, .object-tools a:visited {
-    display: inherit;
-    float: inherit;
-    padding: inherit;
-    background: inherit;
-    font-weight: inherit;
-    font-size: inherit;
-    text-transform: inherit;
-    letter-spacing:inherit;
-    color: inherit;
+    display: block;
+    float: left;
+    padding: 3px 12px;
+    background: #999;
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
 }
 
 .object-tools a:focus, .object-tools a:hover {
